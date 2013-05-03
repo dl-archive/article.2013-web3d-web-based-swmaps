@@ -1,0 +1,41 @@
+% code style for c
+
+\RequirePackage[usenames,dvipsnames]{xcolor}
+
+\definecolor{codeKeyword}{rgb}{0.00, 0.00, 1.00} 
+\definecolor{codeComment}{rgb}{0.00, 0.50, 0.00} 
+\definecolor{codeBkgnd}  {rgb}{0.95, 0.95, 0.95} 
+\definecolor{codeFrame}  {rgb}{0.80, 0.80, 0.80} 
+
+\definecolor{lightblue}  {rgb}{0.17, 0.57, 0.69}
+\definecolor{darkgreen}  {rgb}{0.00, 0.50, 0.00}
+\definecolor{lightgrey}  {rgb}{0.66, 0.66, 0.66}
+
+\lstset
+{
+	language         = C
+,	morekeywords     = {new, min, max, mix, floor, clamp, sign, uniform, texture2D, in, out, abs, pow, atan, acos, asin, sin, cos, dot, cross, length, textureSize2D, sampler2D, varying, return, const, for, if, true, false, sqrt }
+,	sensitive        = true
+,	basicstyle       = \footnotesize\ttfamily
+,	backgroundcolor  = \color{codeBkgnd}
+,	rulecolor        = \color{codeFrame}
+,	keywordstyle     = \color{codeKeyword}
+,	commentstyle     = \color{codeComment}
+,	morecomment      = [l][\color{darkgreen}]{//}
+,	morecomment      = [s][\color{darkgreen}]{/*}{*/}
+,	morecomment      = [l][\color{lightblue}]{\#}
+,	morecomment      = [s][\color{lightgrey}]{\"}{\"}
+,	numberbychapter  = true
+,	numbersep        = -4pt,
+,	tabsize          =  4          
+,	numbers          = none
+,	numberstyle      = \tiny
+,	frame            = single
+,	framesep         =  4pt
+, xleftmargin=\parindent
+,	abovecaptionskip = \medskipamount
+, firstnumber      = 1
+, stepnumber       = 1,
+,	emph             = { void, int, float, bool, vec2, vec3, vec4, ivec2, ivec3, ivec4, bvec2, bvec3, bvec4, mat2, mat3, mat4 }
+,	emphstyle        = \color{lightblue} 
+}
