@@ -4,7 +4,7 @@
 
 *Proceedings of the 18th International Conference on 3D Web Technology (Web3D '13)*, June 20–22, 2013, San Sebastian, Spain. ACM, pp. 91–98.
 
-[![Version of record: 10.1145/2466533.2466550](https://img.shields.io/badge/Version_of_record-10.1145%2F2466533.2466550-007ec6)](https://doi.org/10.1145/2466533.2466550) [![ResearchGate](https://img.shields.io/badge/ResearchGate-publication-00CCBB?logo=researchgate&logoColor=white)](https://www.researchgate.net/publication/262408378)
+[![Version of record: 10.1145/2466533.2466550](https://img.shields.io/badge/Version_of_record-10.1145%2F2466533.2466550-007ec6)](https://doi.org/10.1145/2466533.2466550) [![Author's version: 10.5281/zenodo.24220771](https://img.shields.io/badge/Author%27s_version-10.5281%2Fzenodo.24220771-007ec6)](https://doi.org/10.5281/zenodo.24220771) [![ResearchGate](https://img.shields.io/badge/ResearchGate-publication-00CCBB?logo=researchgate&logoColor=white)](https://www.researchgate.net/publication/262408378)
 
 Video: [YouTube](https://www.youtube.com/watch?v=AaHJRVQ3Z1E)
 
