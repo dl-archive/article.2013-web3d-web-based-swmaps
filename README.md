@@ -42,6 +42,16 @@ The 2013 ACM SIGGRAPH template has no author-version option, so `./build.sh auth
 ## Versions
 
 - [`v1.0-camera-ready`](https://github.com/dl-archive/article.2013-web3d-web-based-swmaps/tree/v1.0-camera-ready) – sources as submitted to ACM (2013-05-03)
+- [`v1.1-revised`](https://github.com/dl-archive/article.2013-web3d-web-based-swmaps/tree/v1.1-revised) – author's revised version (2026-11-14): spelling and grammar fixes, see [Revisions](#revisions)
+
+## Revisions
+
+`v1.1-revised` (2026-11-14) corrects errors in the camera-ready version without changing its content or layout (same page and column breaks).
+Every page carries the note "Author's revised version (2026-11-14). Version of record: https://doi.org/10.1145/2466533.2466550"; in the author build (`./build.sh author`) the ACM author's-version notice sits one line above it.
+
+- Spelling: "leaves", "forgo", "use cases".
+- Grammar and word choice: "various powerful visualization techniques", "estimating benefits, and decision making", "comply with", "focuses on", "The latter focus on", "no interactive frame rates were achieved", "metric names, and the code unit's path", "both item tables and visualization", "neither saturation nor hue change", "necessitating a correct panning speed", "prevents seeing the software map from below", "we suggest fixating the camera", "on their users", "reasonably fast", "The resolution of the website was … pixels", "with respect to", "varies throughout different hardware platforms", "one ultrabook, one MacBook Pro, and one workstation", "in most rendering scenarios; however", a garbled sentence in Section 4.2 (indices bound once, per-draw-call arrays re-bound), apostrophes ("the code units' relative base area", "the camera's position", "the software map's central y-axis", "a module's or item's top or side face"), and missing commas.
+- Hyphenation and typography: project-specific, company-specific, status-related, per-computer, axis-aligned, five-sided, mouse-over, time-consuming; quotation marks (‘disconnected’), "e.g.,"/"i.e.,", en dashes.
 
 ## Citation
 

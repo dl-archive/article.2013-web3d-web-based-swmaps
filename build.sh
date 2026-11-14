@@ -15,7 +15,7 @@ args=(-pdf -interaction=nonstopmode -outdir=/out)
 dir=src out=build
 if [[ ${1:-} == author ]]; then
   # atbegshi (not eso-pic) because it can be loaded before \documentclass; US letter = 215.9 x 279.4 mm
-  notice="\\AtBeginShipout{\\AtBeginShipoutUpperLeft{\\setlength{\\unitlength}{1mm}\\put(107.95,-273.4){\\makebox[0pt][c]{\\fontsize{6.5}{8}\\selectfont\\color[gray]{0.4}\\copyright{} ACM 2013. This is the author\\rq{}s version of the work. It is posted here for your personal use. Not for redistribution. The definitive Version of Record is available at https://doi.org/$DOI.}}}}"
+  notice="\\AtBeginShipout{\\AtBeginShipoutUpperLeft{\\setlength{\\unitlength}{1mm}\\put(107.95,-270.2){\\makebox[0pt][c]{\\fontsize{6.5}{8}\\selectfont\\color[gray]{0.4}\\copyright{} ACM 2013. This is the author\\rq{}s version of the work. It is posted here for your personal use. Not for redistribution. The definitive Version of Record is available at https://doi.org/$DOI.}}}}"
   pre="\\RequirePackage{atbegshi}$notice"
   args+=(-jobname="$MAIN-author" -pdflatex="pdflatex %O '$pre\\input{%S}'")
 fi

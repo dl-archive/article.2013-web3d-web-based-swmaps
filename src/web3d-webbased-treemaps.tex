@@ -5,6 +5,8 @@
 \usepackage{listings}
 
 \input{glsl-lstset}
+\usepackage{eso-pic}
+\AddToShipoutPictureFG{\AtPageLowerLeft{\put(\LenToUnit{0.5\paperwidth},\LenToUnit{6mm}){\makebox[0pt][c]{\fontsize{6.5}{8}\selectfont\color{gray}Author's revised version (2026-11-14). Version of record: \url{https://doi.org/10.1145/2466533.2466550}}}}}
 
 \TOGonlineid{45678}
 \TOGvolume{0}
@@ -45,7 +47,7 @@
 	\includegraphics[width=.496\linewidth]{figures/dashboard2}
 	\includegraphics[width=.496\linewidth]{figures/prototype2clean}
 	\caption{
-	Left: Dashboard accessed from a tablet computer, which summarizes project specific performance indicators (metrics) and links them to software maps.
+	Left: Dashboard accessed from a tablet computer, which summarizes project-specific performance indicators (metrics) and links them to software maps.
 	Right: Software map with code metrics mapped to ground area, height, and color, rendered in real-time in the browser. }
 	\label{fig:teaser}
 }
@@ -56,11 +58,11 @@
 \emph{Software maps} -- linking rectangular 3D-Treemaps, software system structure, and performance indicators -- are commonly used to support informed decision making in software-engineering processes.
 A key aspect for this decision making is that software maps provide the structural context required for correct interpretation of these performance indicators.
 In parallel, source code repositories and collaboration platforms are an integral part of today's software-engineering tool set, but cannot properly incorporate software maps since implementations are only available as stand-alone applications.
-Hence, software maps are 'disconnected' from the main body of this tool set, rendering their use and provisioning overly complicated, which is one of the main reasons against regular use.
+Hence, software maps are `disconnected' from the main body of this tool set, rendering their use and provisioning overly complicated, which is one of the main reasons against regular use.
 We thus present a web-based rendering system for software maps that achieves both fast client-side page load time and interactive frame rates even with large software maps.
 We significantly reduce page load time by efficiently encoding hierarchy and geometry data for the net transport.
 Apart from that, appropriate interaction, layouting, and labeling techniques as well as common image enhancements aid evaluation of project-related quality aspects.
-Metrics provisioning can further be implemented by predefined attribute mappings to simplify communication of project specific quality aspects.
+Metrics provisioning can further be implemented by predefined attribute mappings to simplify communication of project-specific quality aspects.
 The system is integrated into dashboards to demonstrate how our web-based approach makes software maps more accessible to many different stakeholders in software-engineering projects.
 \end{abstract}
 
@@ -80,9 +82,9 @@ The system is integrated into dashboards to demonstrate how our web-based approa
 
 For a sustainable software engineering process in large software projects, a number of prerequisites exist.
 These include good resource management, collaboration, code management, prioritization, reviews, and decision making as well as architecture- and feature planning.
-Up-to-date knowledge of the software project, its processes, and, in particular, its source code are further key elements\scite{Eisenbarth2003}.
+Up-to-date knowledge of the software project, its processes, and, in particular, its source code is a further key element\scite{Eisenbarth2003}.
 It is imperative to use additional services and platforms to support and ease this collaborative process\scite{Truemper2012}.
-In fact, most available collaboration platforms provide visualization for various aspects related to development, e.g., branching, summary of development activities, status related charts, source code diffs and many more.
+In fact, most available collaboration platforms provide visualization for various aspects related to development, e.g., branching, summary of development activities, status-related charts, source code diffs, and many more.
 
 \begin{figure}[ht]
   \centering
@@ -92,20 +94,20 @@ In fact, most available collaboration platforms provide visualization for variou
 	\label{fig:process}
 \end{figure}
 
-With increasing projects size, however, management overhead increases and an additional issue arises: Companies struggle with essential information gaps between management and development, which hinder informed decision making\scite{Poole2003}.
+With increasing project size, however, management overhead increases and an additional issue arises: Companies struggle with essential information gaps between management and development, which hinder informed decision making\scite{Poole2003}.
 Such gaps include clearly communicating quality standards (management to development), and, vice versa, reasoning why a specific amount of resources is required for a given development task.
 Visualizing these facts using traditional plain lists and charts is hard because of the exploratory nature of the underlying questions and problems:
 It enforces an iterative refinement of and re-focusing within a massive amount of facts.
-Fortunately, powerful various visualization techniques are available to help bridge this gap and to provide additional up-to-date information, which jointly aid exploring code quality, estimating benefits, and decisions making.
+Fortunately, various powerful visualization techniques are available to help bridge this gap and to provide additional up-to-date information, which jointly aid exploring code quality, estimating benefits, and decision making.
 Among others, code cities\scite{Wettel2007a} or software maps\scite{Bohnet2011} are frequently used in this context.
 We here focus on software maps, which are 3D-Treemaps that provide a hierarchy-preserving layout and spatial context for code artifacts (\emph{code units}) and metrics.
 Each treemap item represents a code unit (at varying abstraction levels) with at least three visual variables (height, ground area, color) that metrics can be mapped to.
 
 While stand-alone applications for software maps, which allow arbitrary metric mappings, exist, their daily use in software engineering projects is significantly limited by several circumstances:
-First and foremost, being stand-alone applications, they are \emph{disconnected} from the remainder of the preexistent tool set, so they impose an unnecessary usage overhead (e.g., context switches, data synchronization) on its users.
-Second, provisioning such application as per-computer stand-alone installation is complex, and, especially in industry contexts, requires the application to comply to company-specific security regulations etc.
+First and foremost, being stand-alone applications, they are \emph{disconnected} from the remainder of the preexistent tool set, so they impose an unnecessary usage overhead (e.g., context switches, data synchronization) on their users.
+Second, provisioning such an application as per-computer stand-alone installation is complex, and, especially in industry contexts, requires the application to comply with company-specific security regulations etc.
 Third, to enable any analysis benefits, specific knowledge not only about metrics is required, but also about how to express quality aspects as metric mappings \scite{Kitchenham1996}, which currently have to be configured per installation.
-This can (partially) be alleviated by providing managers and developers with (initial) training that focus on the company's individual engineering process(es), its requirements, and related quality issues \scite{Broy2006,Deissenboeck2009}.
+This can (partially) be alleviated by providing managers and developers with (initial) training that focuses on the company's individual engineering process(es), its requirements, and related quality issues \scite{Broy2006,Deissenboeck2009}.
 Last, stand-alone applications cannot be integrated in web mashups, which further limits their use.
 
 To overcome these drawbacks, we suggest integrating software-map related use cases into the (web-based) software engineering tool set, including tools such as collaboration platforms, frameworks, or web-interfaces of source code repositories (Figure \ref{fig:process}).
@@ -119,26 +121,26 @@ We demonstrate that our system scales up to real-world data, and evaluate its pe
 
 Visualization of data is in many aspects of high importance, providing meaningful insights for diverse groups of information consumers \scite{Langelier2005,Burger2007}.
 As such, attributed 3D-Treemaps were suggested for software analysis, in the form of Code Cities \scite{Wettel2007a} or more recently as software maps \scite{Bohnet2011}.
-The later focusing on aiding software engineering processes by monitoring certain source code aspects through metrics.
+The latter focus on aiding software engineering processes by monitoring certain source code aspects through metrics.
 Similarly, integrating software maps with the common software-engineering tool set was suggested \scite{Truemper2012}, but focuses on using software maps as additional front-end for recommendation systems.
 
-The generation of treemap layouts, and thereby the provision of a spatial context to source code artifacts, various algorithms have emerged (e.g., \scite{Johnson1991}) for which an excellent resources for further exploration is available \scite{Schulz2011}.
+For the generation of treemap layouts, and thereby the provision of a spatial context to source code artifacts, various algorithms have emerged (e.g., \scite{Johnson1991}) for which an excellent resource for further exploration is available \scite{Schulz2011}.
 For software maps we build on the strip treemap algorithm \scite{Bederson2002} that among others, was recently evaluated and improved \scite{Tak2012}.
 While designing our web-based visualization and its data encoding, we evaluated state-of-the-art technologies \scite{Behr2010,Behr2012}, but neither fitted our needs for exclusively rendering software maps;
-E.g., the additional latency introduced by requiring multiple requests to access distributed precision data over multiple textures seems inappropriate, and requires further investigation for various use cases.
+e.g., the additional latency introduced by requiring multiple requests to access distributed precision data over multiple textures seems inappropriate, and requires further investigation for various use cases.
 Similarly, progressive (or LOD based) data provisioning \scite{Alliez2001} is impractical, unless it is desired to provide geometry data per hierarchy level and thereby allowing stepwise software map refinement.
 
 Concerning efficient rendering of software maps or 3D-Treemaps in general, a technique utilizing geometry shaders was recently proposed \scite{Trapp2013}.
 In WebGL, however, geometry shaders are not yet available, so we use basic rendering via attribute arrays. 
 The suggested techniques as unsharp masking \scite{Luft2006}, edge-enhancement \scite{Nienhaus2003}, or use of camera lights, are directly integrated into our deferred rendering.
-In addition, screen space ambient occlusion techniques, e.g., \scite{McGuire2010}, increase the perceived software maps plasticity, aiding perception through better item and module differentiation and depth cues. 
+In addition, screen space ambient occlusion techniques, e.g., \scite{McGuire2010}, increase the perceived plasticity of software maps, aiding perception through better item and module differentiation and depth cues. 
 Due to the limitations of WebGL, several tricks for data encoding into attribute arrays or G-Buffers (e.g., for texture encoding ids and depths), similar to \scite{Jung2013}, are necessary.
 
 The problem space of labeling 3D-Treemaps is similar to the labeling of geovirtual 3D environments, hence, several works can be found.
 We especially relate to the labeling approach introduced by \scite{Hagedorn2007}.
 Labeling of empty spaces (i.e., due to padding) between modules as in \scite{Maass2007} is not used, since a meaningful orientation and unambiguous placement of labels seems not possible.
 Though not implemented, the layouting by \scite{Lu2008} seems promising for better label placement in software maps.
-Recently suggested approaches to overcome occlusion of labels in 3D navigation maps \scite{Vaaraniemi2012}, might similarly enhance perceptibility of labels in 3D-Treemaps.
+Recently suggested approaches to overcome occlusion of labels in 3D navigation maps \scite{Vaaraniemi2012} might similarly enhance perceptibility of labels in 3D-Treemaps.
 
 \section{Concept and Design}
 
@@ -181,43 +183,43 @@ Here, metrics can be either common code metrics (e.g., lines of code) or project
 When a metric is assigned to one of the treemap attributes, specific mapping parameters are configured.
 For color mapping either a discrete or continuous color scheme is required.
 Height mapping is accomplished through a scale function with a predefined maximum height.
-Area mapping, is also specified by an arbitrary scale function, controlling the code units relative base area.
+Area mapping is also specified by an arbitrary scale function, controlling the code units' relative base area.
 In addition to defining the mapping, various kinds of filters can be applied, e.g., for viewing all items touched by a certain author or team or all revisions referencing a certain bug.
 All in all, defining perspectives is an expert task that requires a good understanding of available metrics and the respective aspect of the code base that is to be modeled by such perspective.
 
 Once a perspective is defined and applied, we continue by rendering the software map and handling user interaction with it.
 For our first prototypes we evaluated several WebGL Engines: ThreeJS, SceneJS and PhiloGL.
-ThreeJS and SceneJS would've needed much customization, and matching our performance needs in their rendering pipeline would've caused similar effort as our custom implementation.
-Due to SceneJS's scene graph and draw list implementation, no interactive frame rates where achieved for rather small software maps.
-Finally, PhiloGL, as a easily extensible, fast, and lightweight engine, seems to fit best for this task.
+ThreeJS and SceneJS would have needed much customization, and matching our performance needs in their rendering pipeline would have caused similar effort as our custom implementation.
+Due to SceneJS's scene graph and draw list implementation, no interactive frame rates were achieved for rather small software maps.
+Finally, PhiloGL, as an easily extensible, fast, and lightweight engine, seems to fit best for this task.
 
 The presented system, however, utilizes no third parties for rendering nor for generalized scene graph management. 
 The WebGL canvas is integrated into HTML and also supports alpha blending, therefore allowing to place other, arbitrary HTML elements before or behind the visualization.
 This is used to display a color legend and text labels for code units without the need to render them within the software map's virtual 3D space.
 
 In the following sections we focus on server-side data provisioning, through efficient geometry and hierarchy data encoding, for browser based rendering.
-For this OpenCTM \scite{OpenCTM2013} was evaluated as a carrier format, but, especially for our data, a more efficient data encoding is obtainable.
-The visualization process is presented in more detail, G-Buffers encoding schemes are provided, and adjustments made to treemap layouting and labeling, as well as interaction specifics are described.
+For this, OpenCTM \scite{OpenCTM2013} was evaluated as a carrier format, but, especially for our data, a more efficient data encoding is obtainable.
+The visualization process is presented in more detail, G-Buffer encoding schemes are provided, and adjustments made to treemap layouting and labeling, as well as interaction specifics are described.
 
 \section{Software-Map Data Provisioning}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=1.0\linewidth]{figures/features3}
-  \caption{This section shows various features of our visualization within the browser. In the upper part, importance-based, separate labeling of code units and modules is applied. In the center, a tooltip containing detailed information like exact metric values and differences, metric names, and the code units path or name. In addition, highlighting of user picked code units, visible as green code units both either item tables and visualization, is shown.
-  In this case, the android project is shown, for which attributes like, e.g., McCabe's complexity, real lines of code, coverage, or number of developers can be visualized.
-    For example, the ActivityManagerService stands with its high nesting level and RLoc count.
+  \caption{This section shows various features of our visualization within the browser. In the upper part, importance-based, separate labeling of code units and modules is applied. In the center, a tooltip containing detailed information like exact metric values and differences, metric names, and the code unit's path or name. In addition, highlighting of user picked code units, visible as green code units in both item tables and visualization, is shown.
+  In this case, the Android project is shown, for which attributes like, e.g., McCabe's complexity, real lines of code, coverage, or number of developers can be visualized.
+    For example, the ActivityManagerService stands out with its high nesting level and RLoc count.
 	It turns out that this item is regularly manipulated by many different developers and thus, could be considered as a potential quality risk.}
 	\label{fig:features}	
 \end{figure}
 
-A software map, as a representation of a tree, consists of modules as nodes and items as leafs, both represented as boxes.
+A software map, as a representation of a tree, consists of modules as nodes and items as leaves, both represented as boxes.
 Modules represent directories or similar project structuring entities.
 Items represent individual code units.
 The height of an item is defined by the relative value of its assigned metric value whereas the height of a module is constant. 
 The generic terms module and item are preferred to avoid confusion with project specific language and structure conventions.
 Software projects based on ABAP\footnote{Advanced Business Application Programming language by SAP} for example, have no file structure but are based on tables and development objects or classes.
-Most C++ projects in contrast, are file based projects with classes; commonly one principle class per header and source pair.
+Most C++ projects, in contrast, are file-based projects with classes; commonly one principal class per header and source pair.
 
 For the representation of the software map two data structures are used: a JSON-based \scite{Json2006} hierarchy and binary geometry data represented by typed arrays \scite{Khronos2012}.
 Both are transmitted via AJAX requests in a compressed way (HTTP compression, i.e., GZIP \scite{Gzip1996}). 
@@ -225,8 +227,8 @@ This reduces the transmitted data by up to 65\% (Table \ref{tab:performance}).
 
 \subsection{Hierarchy Data}
 
-The hierarchy is a JSON structure, where the keys are item ids and the values arrays with information about these items (Figure \ref{fig:jsonexample}).
-The first entry is the \emph{box geometry index}; A pointer into the render geometry that is used for highlighting (i.e., to look up where in the color array the color for this specific item is stored so it can be exchanged for the highlight color) and interactive exploration.
+The hierarchy is a JSON structure, where the keys are item ids and the values are arrays with information about these items (Figure \ref{fig:jsonexample}).
+The first entry is the \emph{box geometry index}: a pointer into the render geometry that is used for highlighting (i.e., to look up where in the color array the color for this specific item is stored so it can be exchanged for the highlight color) and interactive exploration.
 The third entry is the item name.
 To assemble the full item path (e.g., for the tooltip), the second entry, parent id, is used to recursively query the hierarchy and concatenate the item/module names.
 
@@ -266,16 +268,16 @@ In WebGL, vertex index buffers are currently limited to 16-bit indices.
 Thus, a maximum of 65k vertices or $3\,276$ modules and items can be rendered per draw call.
 Because software maps are usually significantly larger, they are rendered in chunks with a maximum of $65\,520$ vertices each.
 Chunks do not need to have the same number of boxes, and a predefined ordering, providing more regular, continuous chunks as, e.g., rectangular shaped patches could be beneficial for frustum culling.
-Contrarily, chunks are filled up in sequence as emerged by the hierarchy, keeping the number of required draw calls to a minimum and forego time consuming server or client-side reorganization of geometry data.
+Contrarily, chunks are filled up in sequence as emerged by the hierarchy, keeping the number of required draw calls to a minimum and forgo time-consuming server or client-side reorganization of geometry data.
 
 Since each chunk represents a sequence of boxes, the indexing remains the same for each chunk; 
 Generating only one chunk and using it for all draw calls saves memory on the GPU.
-During rendering, normals, binary heights, and indices once, and re-bind the arrays for vertices, colors, and ids are bound for every draw call with a different offset (a multiple of the chunk size).
-The various attribute relations demand a quad based triangle definition, resulting in a large redundancy for per box and per face attributes (Figure \ref{fig:arrays}).
+During rendering, normals, binary heights, and indices are bound once, and the arrays for vertices, colors, and ids are re-bound for every draw call with a different offset (a multiple of the chunk size).
+The various attribute relations demand a quad based triangle definition, resulting in a large redundancy for per-box and per-face attributes (Figure \ref{fig:arrays}).
 Furthermore, indices need to be provided for drawing of single triangles, resulting in 6 indices per quad.
 
 For the geometry, we transmit compact versions of the arrays used for rendering by a binary AJAX request (response type \emph{ArrayBuffer}).
-Due to the regular structure of the axis-aligned boxes, indices, normals and binary heights, need not to be transmitted, but can be generated on the client instead. 
+Due to the regular structure of the axis-aligned boxes, indices, normals, and binary heights need not be transmitted, but can be generated on the client instead. 
 There are four arrays remaining: vertices, colors, ids, diff thresholds.
 They are stored consecutively and are each preceded by their length (int).
 During loading, typed views into the received array buffer are created for processing the data.
@@ -290,7 +292,7 @@ Figure \ref{fig:arrays} illustrates the content and memory footprint of all gene
 
 With image-based rendering and deferred stylization, imagery is generated by rendering attributed geometry into textures using render-to-texture while concurrently filling G-Buffers \scite{Saito1990}.
 Rendering to multiple targets, however, is not available with WebGL yet (though an extension is in the works: WebGL\_draw\_buffers), limiting rendering of a single pass to a single G-Buffer.
-Another limitation in WebGL is, that the support for floating point textures is optional. 
+Another limitation in WebGL is that the support for floating point textures is optional. 
 Therefore float values (like depth) have to be encoded in four 8-bit channels (RGBA).
 This section describes how G-Buffer data is encoded and used for stylization and exploration of large software maps. 
 
@@ -309,11 +311,11 @@ To enable the application of various image-based stylizations, a basic set of tw
 The first contains colors and normals (\emph{rgbn-buffer}), the second linearized depths (\emph{depth-buffer}).
 Box identities are rendered to a third G-Buffer (\emph{id-buffer}), that is mandatory for image-based interaction (i.e., hovering).
 
-The rgbn-buffer contains color and normal information, all of which is encoded by four 4 unsigned bytes.
+The rgbn-buffer contains color and normal information, all of which is encoded by four unsigned bytes.
 The color calculation uses various vertex attributes and uniforms.
-Color, diff threshold, binary height, highlight status, highlight and mouse over colors, as well as a procedural texturing are exclusively processed in this pass.
+Color, diff threshold, binary height, highlight status, highlight and mouse-over colors, as well as a procedural texturing are exclusively processed in this pass.
 Factors that are considered for color calculation are described in more detail in the following subsection.
-Since only axis aligned, five-sided boxes are rendered for the software map, only five distinct normals are required.
+Since only axis-aligned, five-sided boxes are rendered for the software map, only five distinct normals are required.
 These are encoded by indices as follows: $\pm 2 \rightarrow \pm x$, $\pm 1 \rightarrow \pm z$, and $0 \rightarrow +y$.
 The normal index is stored as an unsigned byte, which is provided as normalized float in $[0;1]$ within shaders.
 Although no dynamic access to constant arrays within shaders is possible in WebGL, this scheme allows for efficient decoding without branching:
@@ -330,9 +332,9 @@ vec3 decodeNormal(in float i)
 The parameter i is expected in $\lbrack 0;4 \rbrack$ and encodes the normal of a single software-map face via signed indices $\{-2,-1, 0,+1,+2\}$. Its value specifies the vertex component and its sign the normal direction.
 
 The id-buffer provides an unsigned 24-bit integer identity per box, encoded by three bytes.
-It is used for fast object picking and further enables enhancement of various stylizations (i.e, edge enhancement).
+It is used for fast object picking and further enables enhancement of various stylizations (i.e., edge enhancement).
 The depth-buffer stores linearized depth values within the range $[0;1]$ and is encoded by three bytes as well.
-Encoding of 32-bit floats to three single-byte channels, and vise versa, can be done within the shader as follows:
+Encoding of 32-bit floats to three single-byte channels, and vice versa, can be done within the shader as follows:
 \\
 \begin{lstlisting}
 vec3 float2vec3i(const in float f)
@@ -350,11 +352,11 @@ float vec3i2float(const in vec4 v)
 }
 \end{lstlisting}
 
-To enhance human perception of the software-map hierarchy and to facilitate visually distinction of individual code units, a composition of various stylization techniques can be applied (Figure \ref{fig:stylization}):
+To enhance human perception of the software-map hierarchy and to facilitate visual distinction of individual code units, a composition of various stylization techniques can be applied (Figure \ref{fig:stylization}):
 Static lighting, edge enhancements through contour lines \scite{Nienhaus2003}, and either unsharp masking \scite{Luft2006} or any efficient screen space ambient occlusion (SSAO).
 
-Static lighting, often uses a distance light at the cameras position \scite{Trapp2013}. 
-For software maps, we suggest to fixate the camera at a constant altitude.
+Static lighting often uses a distant light at the camera's position \scite{Trapp2013}. 
+For software maps, we suggest fixating the camera at a constant altitude.
 This yields a constant, view independent coloring of the software-map's top faces (i.e., all horizontal faces), and further reduces the overall light variation for vertical faces due to camera movement.
 Colors remain stable for top faces and can be adjusted to exactly match the color scheme (visual matching of colors of vertical faces becomes also more accurate).
 
@@ -362,10 +364,10 @@ For edge enhancement, contours generated from normal, color, and id buffers are 
 Depth-buffer unsharp masking increases depth cues and the overall visual quality.
 Alternatively, SSAO can be used, which further increases the perceived plasticity of the software map.
 In Figure \ref{fig:features}, unsharp masking was used, compared with a more expensive SSAO used in Figure \ref{fig:stylization}.
-Illumination that affects saturation or hue (e.g., color bleeding as result of global illumination) is not recommended, since they obviously distort the perceptual color mapping and thereby hinder accurately reading metrics encoded in color.
+Illumination that affects saturation or hue (e.g., color bleeding as result of global illumination) is not recommended, since it obviously distorts the perceptual color mapping and thereby hinder accurately reading metrics encoded in color.
 
 It is often difficult to discern the basic structure of the code base (i.e., the root modules) even with basic padding applied to the treemap layout.
-To alleviate this, we increase the border between root modules and color it differently (i.e., darker, with neither saturation nor hue change - Figure \ref{fig:stylization}).
+To alleviate this, we increase the border between root modules and color it differently (i.e., darker, with neither saturation nor hue change -- Figure \ref{fig:stylization}).
 Since the interesting modules may not be at the top hierarchy level, we can adjust the hierarchy level that is considered the root level.
 
 \subsection{Interactive Exploration}
@@ -391,7 +393,7 @@ The camera navigation for software maps is based on and thus similar to common t
 It supports panning, zooming, and rotation, wherein the first two require depth buffer access for fulfilling individual constraints.
 
 When a user starts panning, the initial intersection point is used as a reference point and required to remain exactly below the mouse cursor.
-This is contrary to intersecting with the ground plane, since panning can be initiated by picking a side face at arbitrary height, necessitate a correct panning speed.
+This is contrary to intersecting with the ground plane, since panning can be initiated by picking a side face at arbitrary height, necessitating a correct panning speed.
 The first click of the interaction is used to access the depth-buffer and to retrieve the related object-space position $p_0$.
 This point is our constraint for panning, which means that for every mouse position there has to be an appropriate positioning for the software map, so that the point under the cursor remains $p_0$.
 With this point and the up normal we build a plane, that defines the panning space.
@@ -400,19 +402,19 @@ This ray then is converted to object space and used to intersect with the plane 
 The delta of $p_0$ and $p$ is the translation required for our constrained panning.
 We further require at least one single fragment of the software map to be at the viewport's center by constraining the software-map's center to its own bounding box.
 
-Rotation is applied around the software map central y-axis, since we found users to be disturbed when rotation is around y-aligned axes centered at the initial intersection points.
+Rotation is applied around the software map's central y-axis, since we found users to be disturbed when rotation is around y-aligned axes centered at the initial intersection points.
 Furthermore, vertical rotation is restricted by a minimum angle to a range above the horizon, and a minimum angular distance to the up vector.
-This prevents the software map to be seen from below or upside down.
+This prevents seeing the software map from below or upside down.
 
-For zooming, the camera should move in respect to the pointed software-map position.
+For zooming, the camera should move with respect to the pointed software-map position.
 This is done by scaling the distance between the pointed position in the scene (again via depth-buffer) and the camera position.
 Since the software-map's center needs to be constrained to the ground plane, a temporary center is calculated based on the initial intersection with the ground plane and then used to obtain the new viewray-groundplane intersection as new center.
-With that, zooming can be deliberately used to pan and scale towards a module or items top or side face.
+With that, zooming can be deliberately used to pan and scale towards a module's or item's top or side face.
 This approach allows fast transitions to arbitrary places of interest by zooming only, thus increasing navigation efficiency.
 For mobile use, i.e., devices with touch enabled displays, a simple mapping of common touch gestures is used (pinch is simultaneously used for rotation and zoom).
 
 Two other aspects of software map exploration are hovering and highlighting.
-The first causes a recolouring of the hovered item or module for the time being hovered.
+The first causes a recoloring of the hovered item or module for the time being hovered.
 The second can be applied for multiple items, by batch-selecting items in the \emph{top item lists}.
 The item's basic color is retrieved from the color attribute and replaced by the hover color, if the item is hovered. 
 Additionally, if the compare threshold attribute contains a valid value, a procedural texture (i.e., horizontal stripes) is applied to mark the difference between the current and the old metric value (yellow stripes as in Figure \ref{fig:features}).
@@ -460,8 +462,8 @@ Finally, double clicking items browses the linked source code and tooltips are u
 		\multicolumn{3}{l}{\small $^*$gzip (zlib) compression level 1, with compress and decompress times.}\\
 	\end{tabular*}
 	\caption{
-		Enlisted are file sizes of all files required for the visualization.
-		System: Intel Xeon CPU E5-1620 0 at 3.6 GHz. }
+		Listed are file sizes of all files required for the visualization.
+		System: Intel Xeon CPU E5-1620 0 at 3.6\,GHz. }
 	\label{tab:performance}
 \end{table}
 
@@ -469,7 +471,7 @@ The presented visualization is applicable to similar techniques like CodeCities\
 Although large code bases might contain more code units, applying a one-to-one mapping from code units to treemap items is not useful then: Visual clutter (e.g., too small individual items, occlusion) begins to increase drastically, which generally renders software maps unusable.
 Hence, pre-filtering of input data -- to reduce the number of code units to approx. 100k -- has to take place anyway, so that the scalability of our system is sufficient even for larger code bases.
 
-The precision of the depth buffer varies through out different hardware platforms, on some systems resulting in tiny discontinuities, causing visual artifacts on depth-buffer-based post processing (unsharp masking, SSAO).
+The precision of the depth buffer varies throughout different hardware platforms, on some systems resulting in tiny discontinuities, causing visual artifacts on depth-buffer-based post processing (unsharp masking, SSAO).
 
 To ensure the highest possible compatibility while providing good performance on powerful machines like desktop computers with dedicated graphics cards, it will become necessary to provide a baseline functionality based on WebGL 1.0 with optional optimized code paths that make use of the available extensions if they are available.
 For example, with WebGL\_depth\_texture we could skip the depth pass and use the depth buffer from the color pass for SSAO.
@@ -508,19 +510,19 @@ The chunked rendering code would remain active (for systems without this extensi
 	\bottomrule
 	\end{tabular*}
 	\caption{	
-		Enlisted are transmission, initialization, and average times per frame for rendering software maps of the two previous projects.
+		Listed are transmission, initialization, and average times per frame for rendering software maps of the two previous projects.
 		Transmission and initialization times were measured separately, since the software map is available for interaction with geometry and report data provided, except for tool tips.
-		Local initialization times were measured with Google Chrome's tracing capability, the influence of the tracing itself are ignored.
+		Local initialization times were measured with Google Chrome's tracing capability, the influence of the tracing itself is ignored.
 		The frame times were averaged across 1000 frames of continuous redraw with no interaction (by default, redraw is only triggered on interaction).
 		Chrome 26.0.1410.64 was used as browser (WebKit 537.31, JavaScript V8 3.16.14.11).
-		The resolution of the website $1024 \times 1280$ and for the OpenGL canvas $976 \times 732$ pixel. 
-		For Windows, ANGLE was utilized by chrome, which surprisingly performed faster than direct OpenGL rendering.
+		The resolution of the website was $1024 \times 1280$ and of the OpenGL canvas $976 \times 732$ pixels. 
+		For Windows, ANGLE was utilized by Chrome, which surprisingly performed faster than direct OpenGL rendering.
 		}
 	\label{tab:frametimes}
 \end{table}
 
-Concerning rendering performance, we measured transmission, initialization and frame rendering times on three platforms: one ultrabook, one mac book pro, and one workstation.
-For all devices, interactive frame rates have been met and transmission and initialization delays are reasonable fast within our use-cases (Table \ref{tab:frametimes}).
+Concerning rendering performance, we measured transmission, initialization and frame rendering times on three platforms: one ultrabook, one MacBook Pro, and one workstation.
+For all devices, interactive frame rates have been met and transmission and initialization delays are reasonably fast within our use cases (Table \ref{tab:frametimes}).
 
 \section{Conclusion and Future Work}
 
@@ -531,11 +533,11 @@ A combination of interaction techniques for easy manipulation of the camera as w
 
 Introducing filtering for modules, metrics, developers, code units etc. on the client side would be beneficial for the visualization's exploratory nature.
 Layouting and configurable attribute mapping allowing for arbitrary metric-mapping parametrization from within the browser could increase the scope of web-based software-map analysis further.
-Concerning data provisioning, we found that general-purpose storage containers (e.g., \scite{Behr2010}, \scite{Behr2012}, \scite{Jung2013}) can be useful in most rendering scenarios, however they do not provide the efficiency of our approach (two vertices per box, various attributes, decoupled hierarchy, etc.).
+Concerning data provisioning, we found that general-purpose storage containers (e.g., \scite{Behr2010}, \scite{Behr2012}, \scite{Jung2013}) can be useful in most rendering scenarios; however, they do not provide the efficiency of our approach (two vertices per box, various attributes, decoupled hierarchy, etc.).
 
 The availability of a web-based software-map implementation now allows for connecting software maps to collaboration platforms, such as Github\footnote{\url{http://www.github.com}}, which improves user experience and lowers the access barrier.
 With the centralized provisioning of (predefined) perspectives, users can now collaboratively re-use perspectives without being forced to define any themselves.
-We hope, more APIs promoting interactive web-based software maps or similar visualizations become available, making software visualization more accessible and supporting today's software engineering processes.
+We hope more APIs promoting interactive web-based software maps or similar visualizations become available, making software visualization more accessible and supporting today's software engineering processes.
 
 \section*{Acknowledgements}
 
